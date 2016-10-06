@@ -12,9 +12,9 @@ namespace PhilippinesCarPrices.Cars
                 return new Dictionary
                     <Func<decimal, bool>, decimal>
                 {
-                    {LowCapacityFunc, 75.0m},
-                    {MediumCapacityFunc, 90.0m},
-                    {BigCapacityFunc, 150.0m}
+                    {LowCapacityFunc, 0.75m},
+                    {MediumCapacityFunc, 0.9m},
+                    {BigCapacityFunc, 1.5m}
                 };
             }
         }

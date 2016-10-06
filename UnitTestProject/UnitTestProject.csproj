@@ -82,8 +82,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest.cs" />
+    <Compile Include="UnitTestCalculation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestCarFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhilippinesCarPrices\PhilippinesCarPrices.csproj">
