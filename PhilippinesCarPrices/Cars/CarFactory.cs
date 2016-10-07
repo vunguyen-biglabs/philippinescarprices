@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace PhilippinesCarPrices
 {
@@ -8,13 +9,10 @@ namespace PhilippinesCarPrices
             StaticData.Country importFrom)
         {
             var importedRegion = GetImportedRegion(importFrom);
-            var car = GetCar(importedRegion);
-            return car.Init(name, originalPrice, capacity, importFrom);
-        }
-
-        private static Car GetCar(StaticData.ImportedRegion importedRegion)
-        {
-            return StaticData.RegionCars[importedRegion];
+            var importTaxRateTable = StaticData.RegionImportTaxRateTable[importedRegion];
+            var importTaxRate = importTaxRateTable[importTaxRateTable.Keys.Single(x => x(capacity))];
+            var car = new Car(name, originalPrice, capacity, importFrom, importTaxRate);
+            return car;
         }
 
         private static StaticData.ImportedRegion GetImportedRegion(StaticData.Country importFrom)

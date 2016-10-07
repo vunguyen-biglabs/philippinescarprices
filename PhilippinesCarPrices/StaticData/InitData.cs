@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using PhilippinesCarPrices.Cars;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PhilippinesCarPrices
 {
@@ -20,7 +20,7 @@ namespace PhilippinesCarPrices
             Japan = 2
         }
 
-        public const decimal UsdToPesoExchangeRata = 47.0m;
+        public const decimal UsdToPesoExchangeRate = 47.0m;
 
         public static readonly Dictionary<Country, ImportedRegion> CountryRegions = new Dictionary
             <Country, ImportedRegion>
@@ -30,11 +30,40 @@ namespace PhilippinesCarPrices
             {Country.USA, ImportedRegion.USA}
         };
 
-        public static readonly Dictionary<ImportedRegion, Car> RegionCars = new Dictionary<ImportedRegion, Car>
+        private static readonly Func<decimal, bool> LowCapacityFunc = c => c <= 2.0m;
+        private static readonly Func<decimal, bool> MediumCapacityFunc = c => 2 < c & c <= 5.0m;
+        private static readonly Func<decimal, bool> BigCapacityFunc = c => 5 < c;
+
+        public static Dictionary<ImportedRegion, Dictionary<Func<decimal, bool>, decimal>> RegionImportTaxRateTable = new Dictionary
+            <ImportedRegion, Dictionary<Func<decimal, bool>, decimal>>
         {
-            {ImportedRegion.Europe, new EuropeCar()},
-            {ImportedRegion.USA, new UsaCar()},
-            {ImportedRegion.Japan, new JavCar()},
+            {
+                ImportedRegion.Europe, new Dictionary
+                    <Func<decimal, bool>, decimal>
+                {
+                    {LowCapacityFunc, 1.0m},
+                    {MediumCapacityFunc, 1.2m},
+                    {BigCapacityFunc, 2.0m}
+                }
+            },
+            {
+                ImportedRegion.USA, new Dictionary
+                    <Func<decimal, bool>, decimal>
+                {
+                    {LowCapacityFunc, 0.75m},
+                    {MediumCapacityFunc, 0.9m},
+                    {BigCapacityFunc, 1.5m}
+                }
+            },
+            {
+                ImportedRegion.Japan, new Dictionary
+                    <Func<decimal, bool>, decimal>
+                {
+                    {LowCapacityFunc, 0.7m},
+                    {MediumCapacityFunc, 0.8m},
+                    {BigCapacityFunc, 1.35m}
+                }
+            }
         };
     }
 }

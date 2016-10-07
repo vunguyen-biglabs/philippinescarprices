@@ -44,9 +44,6 @@
     <Compile Include="Calculator\Calculator.cs" />
     <Compile Include="Cars\Car.cs" />
     <Compile Include="Cars\CarFactory.cs" />
-    <Compile Include="Cars\EuropeCar.cs" />
-    <Compile Include="Cars\JavCar.cs" />
-    <Compile Include="Cars\USACar.cs" />
     <Compile Include="StaticData\InitData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
